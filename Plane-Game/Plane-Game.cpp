@@ -7,6 +7,7 @@ void PlaneGame::init() {
 
 void PlaneGame::run() {
     while (running) {
-        // Run loop here
+        window.eventHandle();
+        window.render();
     }
 }

@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB SOURCES CONFIGURE_DEPENDS
-    "${CMAKE_SOURCE_DIR}/demo/*.cpp" # Runs the demo by default
+    "${CMAKE_SOURCE_DIR}/Plane-Game/*.cpp" # Runs the demo by default
                                      # Change to "${CMAKE_SOURCE_DIR}/src/YOUR_MAIN_FILE.cpp"
 )
 

@@ -1,7 +1,7 @@
 #include "Window.hpp"
 
 void Window::initWindow() {
-    InitWindow(630, 420, "Raylib 6.0 Template");
+    InitWindow(m_width, m_height, "Raylib 6.0 Template");
     SetTargetFPS(60);
 }
 

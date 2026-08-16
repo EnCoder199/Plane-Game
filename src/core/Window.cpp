@@ -6,7 +6,10 @@ void Window::initWindow() {
 }
 
 void Window::render() {
-    // Nothing to render yet
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    // Render Here
+    EndDrawing();
 }
 
 void Window::eventHandle() {

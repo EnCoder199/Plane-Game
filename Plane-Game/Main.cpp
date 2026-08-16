@@ -1,9 +1,9 @@
-#include "raylib.h"
 #include "Plane-Game.hpp"
+#include "raylib.h"
 
 int main(void) {
-    PlaneGame game;
-    game.init();
+  PlaneGame game;
+  game.init();
 
-    game.run();
+  game.run();
 }

@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build and Run",
+            "type": "cppdbg",
+            "request": "launch",
+
+            "program": "${workspaceFolder}/bin/Template",
+
+            "cwd": "${workspaceFolder}",
+
+            "preLaunchTask": "CMake: Build",
+
+            "MIMode": "lldb",
+
+            "externalConsole": false
+        }
+    ]
+}

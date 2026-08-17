@@ -19,7 +19,9 @@ add_executable(Template ${SOURCES}
     src/core/object/Collision.cpp
     src/core/object/Rotation.hpp
     src/core/Window.hpp
-    src/core/Window.cpp)
+    src/core/Window.cpp
+    Plane-Game/Player.hpp
+    Plane-Game/Player.cpp)
 
 target_include_directories(Template PRIVATE
     "${CMAKE_SOURCE_DIR}/lib"

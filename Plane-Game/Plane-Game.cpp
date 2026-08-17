@@ -2,13 +2,13 @@
 
 void PlaneGame::init() {
     // Hold init here
-    window.initWindow();
+    m_window.initWindow();
 }
 
 void PlaneGame::run() {
-    while (running) {
-        running = !WindowShouldClose();
-        window.eventHandle();
-        window.render();
+    while (m_running) {
+        m_running = !WindowShouldClose();
+        m_window.eventHandle();
+        m_window.render();
     }
 }

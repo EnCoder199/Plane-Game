@@ -4,12 +4,12 @@
 
 class PlaneGame {
   protected:
-    bool running;
-    float dt;
-    Window window;
+    bool m_running;
+    float m_dt;
+    Window m_window;
 
   public:
-    PlaneGame() : running(true), dt(0.0f) {}
+    PlaneGame() : m_running(true), m_dt(0.0f) {}
     void init();
     void run();
 };

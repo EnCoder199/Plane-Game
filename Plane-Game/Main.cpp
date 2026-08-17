@@ -1,5 +1,6 @@
 #include "Plane-Game.hpp"
-#include "raylib.h"
+
+// Note: Add doxygen support
 
 int main(void) {
     PlaneGame game;

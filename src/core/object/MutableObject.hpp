@@ -4,16 +4,16 @@
 #include "raylib.h"
 
 class MutableObject {
-  private:
-    Vector2 pos;
-    Vector2 size;
-    Rotation rotation;
-    CollisionRectangle collisionbox;
+  protected:
+    Vector2 m_pos;
+    Vector2 m_size;
+    Rotation m_rotation;
+    CollisionRectangle m_collisionbox;
 
   public:
     // Constructor
     MutableObject(Vector2 p_pos, Vector2 p_size)
-        : pos(p_pos), size(p_size), collisionbox(pos, size) {}
+        : m_pos(p_pos), m_size(p_size), m_collisionbox(p_pos, p_size) {}
 
     // Functions
     Vector2 getPos();

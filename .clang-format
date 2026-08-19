@@ -93,7 +93,7 @@ BinPackArguments: true
 BinPackLongBracedList: true
 BinPackParameters: BinPack
 BitFieldColonSpacing: Both
-BracedInitializerIndentWidth: -1
+BracedInitializerIndentWidth: 0 #-1
 BraceWrapping:
   AfterCaseLabel:  false
   AfterClass:      false
@@ -240,7 +240,7 @@ PenaltyExcessCharacter: 1000000
 PenaltyIndentedWhitespace: 0
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Right
-PPIndentWidth:   -1
+PPIndentWidth:   0 #-1
 QualifierAlignment: Leave
 ReferenceAlignment: Pointer
 ReflowComments:  Always

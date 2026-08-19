@@ -8,7 +8,7 @@
 
 class KeyHandle {
   private:
-    std::vector<std::tuple<int, std::function<void()>>> m_keyToFunction;
+    std::vector<std::pair<int, std::function<void()>>> m_keyToFunction;
 
   public:
     // Constructors
@@ -16,5 +16,5 @@ class KeyHandle {
 
     // Functions
     void addKey(int p_key, std::function<void()> p_func);
-    void detectKeyPresses();
+    void handleKeyInput();
 };

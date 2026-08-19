@@ -21,7 +21,8 @@ add_executable(Template ${SOURCES}
     src/core/Window.hpp
     src/core/Window.cpp
     Plane-Game/Player.hpp
-    Plane-Game/Player.cpp)
+    Plane-Game/Player.cpp
+    src/core/Logging.hpp)
 
 target_include_directories(Template PRIVATE
     "${CMAKE_SOURCE_DIR}/lib"

@@ -23,7 +23,7 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
+#*.a
 *.lib
 
 # Executables
@@ -34,3 +34,7 @@
 # Build files
 bin
 build
+
+# Personal use files
+.github
+AGENTS.md

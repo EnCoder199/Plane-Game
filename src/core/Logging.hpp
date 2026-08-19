@@ -16,6 +16,7 @@
 #endif // DEBUG
 
 // If DEBUG is defigned, enable all logging
+// NOTE: This must be edited when anything is added
 #ifdef DEBUG
 #define GAME_CONSOLE_ERROR_LOG
 #define GAME_CONSOLE_LOG

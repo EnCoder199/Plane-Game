@@ -1,14 +1,26 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(Template LANGUAGES CXX)
+# FIXED: Enforcing both C and CXX allows FetchContent to compile raylib natively anywhere
+project(Template LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# --- AUTOMATIC CROSS-PLATFORM RAYLIB FETCHING ---
+include(FetchContent)
+FetchContent_Declare(
+    raylib
+    GIT_REPOSITORY "https://github.com/raysan5/raylib" # <-- Added explicit quotes
+    GIT_TAG        "5.5"
+)
+set(RAYLIB_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(raylib)
+# ------------------------------------------------
+
+
 file(GLOB SOURCES CONFIGURE_DEPENDS
-    "${CMAKE_SOURCE_DIR}/Plane-Game/*.cpp" # Runs the demo by default
-                                     # Change to "${CMAKE_SOURCE_DIR}/src/YOUR_MAIN_FILE.cpp"
+    "${CMAKE_SOURCE_DIR}/Plane-Game/*.cpp"
 )
 
 add_executable(Template ${SOURCES}
@@ -25,25 +37,19 @@ add_executable(Template ${SOURCES}
     Plane-Game/Player.cpp
     src/core/Logging.hpp
     src/core/CameraHandling.hpp
-    src/core/CameraHandling.cpp)
+    src/core/CameraHandling.cpp
+)
 
 target_include_directories(Template PRIVATE
-    "${CMAKE_SOURCE_DIR}/lib"
     "${CMAKE_SOURCE_DIR}/src"
     "${CMAKE_SOURCE_DIR}/src/core"
     "${CMAKE_SOURCE_DIR}/src/core/object"
+    "${raylib_SOURCE_DIR}/src" # <-- ADD THIS LINE
 )
 
-if(APPLE)
-    target_link_libraries(Template PRIVATE
-        "${CMAKE_SOURCE_DIR}/lib/libraylib.a"
-        "-framework CoreVideo"
-        "-framework IOKit"
-        "-framework Cocoa"
-        "-framework GLUT"
-        "-framework OpenGL"
-    )
-endif()
+
+# This target includes everything needed for Windows, Mac, and Linux build chains automatically
+target_link_libraries(Template PRIVATE raylib)
 
 set_target_properties(Template PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"

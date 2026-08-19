@@ -8,10 +8,11 @@
 
 #define DEBUG // Remove to stop debug
 
+
 // Ensures debug and distribution aren't both on
 #ifdef DEBUG
 #ifdef DISTRIBUTION
-throw std::invalid_argument("Both DEBUG and DISTRIBUTION cannot be defined.");
+#error "Both DEBUG and DISTRIBUTION cannot be defined."
 #endif // DISTRIBUTION
 #endif // DEBUG
 

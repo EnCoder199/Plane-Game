@@ -4,6 +4,7 @@ project(Template LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB SOURCES CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/Plane-Game/*.cpp" # Runs the demo by default
@@ -22,7 +23,9 @@ add_executable(Template ${SOURCES}
     src/core/Window.cpp
     Plane-Game/Player.hpp
     Plane-Game/Player.cpp
-    src/core/Logging.hpp)
+    src/core/Logging.hpp
+    src/core/CameraHandling.hpp
+    src/core/CameraHandling.cpp)
 
 target_include_directories(Template PRIVATE
     "${CMAKE_SOURCE_DIR}/lib"

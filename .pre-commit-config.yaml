@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: clang-format
+        name: Clang-Format (Local Engine)
+        entry: clang-format -i
+        language: system
+        # This matches all standard C++ source and header extensions
+        files: \.(c|cc|cpp|cxx|h|hpp|hxx)$

@@ -8,7 +8,6 @@
 
 #define DEBUG // Remove to stop debug
 
-
 // Ensures debug and distribution aren't both on
 #ifdef DEBUG
 #ifdef DISTRIBUTION

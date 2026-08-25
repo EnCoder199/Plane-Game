@@ -13,9 +13,9 @@ class Player
     m: Medium
     b: Big
     */
-    char m_type;
+    char m_type{'m'};
 
-    Color m_colour;
+    Color m_colour{BLUE};
 
   public:
     Player(Vector2 p_pos, Vector2 p_size) : MutableObject(p_pos, p_size) {}

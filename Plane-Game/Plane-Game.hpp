@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CameraHandling.hpp"
 #include "Player.hpp"
 #include "Window.hpp"
 #include "raylib.h"
@@ -11,13 +12,14 @@ class PlaneGame {
     Window m_window;
 
     Player m_player;
-
     // Camera
-    Camera2D m_camera{0};
+    CameraHandling m_cameraHandle;
+    Camera2D *m_cameraPointer;
 
   public:
     PlaneGame()
-        : m_running(true), m_dt(0.0f), m_player(10.0f, 10.0f, 30.0f, 30.0f) {}
+        : m_running(true), m_dt(0.0f), m_player(10.0f, 10.0f, 30.0f, 30.0f),
+          m_cameraHandle(&m_player), m_cameraPointer(&m_cameraHandle.camera) {}
     void init();
     void run();
 };

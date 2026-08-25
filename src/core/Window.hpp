@@ -1,4 +1,6 @@
 #pragma once
+#include <functional>
+
 #include "Keyhandle.hpp"
 #include "raylib.h"
 
@@ -7,6 +9,7 @@ class Window {
     KeyHandle m_keyhandle;
     int m_width;
     int m_height;
+    bool m_initialized{false};
 
   public:
     Window()
@@ -14,12 +17,14 @@ class Window {
     Window(int p_width, int p_height)
         : m_width(p_width), m_height(p_height) {
     } // This is an argument with args
-    void initWindow();
+    bool initWindow();
     void clearScreen();
     void startRender();
     void endRender();
     void eventHandle();
-    void addKeyToKeyHandle(int p_key, std::__1::function<void()> p_func);
+    void addKeyToKeyHandle(int p_key, std::function<void()> p_func);
+    void close();
+    bool isInitialized() const { return m_initialized; }
     int getWidth() const { return m_width; }
     int getHeight() const { return m_height; }
 };

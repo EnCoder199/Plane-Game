@@ -18,10 +18,41 @@
 // If DEBUG is defigned, enable all logging
 // NOTE: This must be edited when anything is added
 #ifdef DEBUG
+// Normal logging
+#define GAME_LOG
+#define GAME_ERROR
+
+// Custom logging
 #define GAME_CONSOLE_ERROR_LOG
 #define GAME_CONSOLE_LOG
 #define GAME_FILE_LOG
 #endif
+
+#ifdef GAME_LOG
+#define gameLog(p_log)                                                         \
+    do {                                                                       \
+        auto now = std::chrono::system_clock::now();                           \
+        auto time = std::chrono::system_clock::to_time_t(now);                 \
+        std::cout << "["                                                       \
+                  << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S") \
+                  << "] GAME_OUT: " << p_log << std::endl;                     \
+    } while (0)
+#else
+#define gameLog(p_log)
+#endif // GAME_LOG
+
+#ifdef GAME_ERROR
+#define gameErr(p_err)                                                         \
+    do {                                                                       \
+        auto now = std::chrono::system_clock::now();                           \
+        auto time = std::chrono::system_clock::to_time_t(now);                 \
+        std::cout << "["                                                       \
+                  << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S") \
+                  << "] GAME_ERR: " << p_err << std::endl;                     \
+    } while (0)
+#else
+#define gameErr(p_err)
+#endif // GAME_ERROR
 
 #ifdef GAME_CONSOLE_ERROR_LOG
 #define gameConsoleErrorLog(p_err)                                             \

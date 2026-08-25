@@ -6,50 +6,69 @@ project(Template LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# --- AUTOMATIC CROSS-PLATFORM RAYLIB FETCHING ---
-include(FetchContent)
-FetchContent_Declare(
-    raylib
-    GIT_REPOSITORY "https://github.com/raysan5/raylib" # <-- Added explicit quotes
-    GIT_TAG        "5.5"
-)
 set(RAYLIB_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(raylib)
-# ------------------------------------------------
 
+set(RAYLIB_SOURCE_DIR "" CACHE PATH
+    "Path to a local raylib checkout for offline builds")
+if(RAYLIB_SOURCE_DIR)
+    add_subdirectory("${RAYLIB_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/raylib-build"
+                     EXCLUDE_FROM_ALL)
+    set(RAYLIB_INCLUDE_DIR "${RAYLIB_SOURCE_DIR}/src")
+else()
+    include(FetchContent)
+    FetchContent_Declare(
+        raylib
+        URL "https://github.com/raysan5/raylib/archive/refs/tags/5.5.tar.gz"
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    )
+    FetchContent_MakeAvailable(raylib)
+    set(RAYLIB_INCLUDE_DIR "${raylib_SOURCE_DIR}/src")
+endif()
 
-file(GLOB SOURCES CONFIGURE_DEPENDS
-    "${CMAKE_SOURCE_DIR}/Plane-Game/*.cpp"
-)
-
-add_executable(Template ${SOURCES}
-    src/core/Keyhandle.hpp
-    src/core/Keyhandle.cpp
-    src/core/object/MutableObject.hpp
-    src/core/object/MutableObject.cpp
-    src/core/object/Collision.hpp
-    src/core/object/Collision.cpp
-    src/core/object/Rotation.hpp
-    src/core/Window.hpp
-    src/core/Window.cpp
-    Plane-Game/Player.hpp
+set(SOURCES
+    Plane-Game/Main.cpp
+    Plane-Game/Plane-Game.cpp
     Plane-Game/Player.cpp
-    src/core/Logging.hpp
-    src/core/CameraHandling.hpp
     src/core/CameraHandling.cpp
+    src/core/Keyhandle.cpp
+    src/core/Window.cpp
+    src/core/object/Collision.cpp
+    src/core/object/MutableObject.cpp
 )
+
+add_executable(Template ${SOURCES})
 
 target_include_directories(Template PRIVATE
     "${CMAKE_SOURCE_DIR}/src"
     "${CMAKE_SOURCE_DIR}/src/core"
     "${CMAKE_SOURCE_DIR}/src/core/object"
-    "${raylib_SOURCE_DIR}/src" # <-- ADD THIS LINE
+    "${RAYLIB_INCLUDE_DIR}"
 )
 
-
-# This target includes everything needed for Windows, Mac, and Linux build chains automatically
 target_link_libraries(Template PRIVATE raylib)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang|Clang|GNU")
+    target_compile_options(Template PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+
+enable_testing()
+add_executable(CoreTests
+    tests/CoreTests.cpp
+    src/core/object/Collision.cpp
+    src/core/object/MutableObject.cpp
+)
+target_include_directories(CoreTests PRIVATE
+    "${CMAKE_SOURCE_DIR}/src/core"
+    "${CMAKE_SOURCE_DIR}/src/core/object"
+    "${RAYLIB_INCLUDE_DIR}"
+)
+target_link_libraries(CoreTests PRIVATE raylib)
+if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang|Clang|GNU")
+    target_compile_options(CoreTests PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+add_test(NAME CoreTests COMMAND CoreTests)
 
 set_target_properties(Template PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"

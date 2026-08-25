@@ -3,15 +3,15 @@
 #include <iostream>
 
 void PlaneGame::init() {
-    // Window init
-    m_window.initWindow();
+    if (!m_window.initWindow()) {
+        m_running = false;
+        return;
+    }
 
-    // Camera init - CRITICAL: offset must be set to center of screen
-    m_camera.target = {100.0f, 100.0f};
-    m_camera.target = {m_window.getWidth() / 2.0f, m_window.getHeight() / 2.0f};
-    m_camera.offset = {m_window.getWidth() / 2.0f, m_window.getHeight() / 2.0f};
-    m_camera.rotation = 0.0f;
-    m_camera.zoom = 1.0f;
+    m_cameraHandle.configureViewport(m_window.getWidth(), m_window.getHeight());
+    m_cameraPointer->target = m_player.getPos();
+    m_cameraPointer->rotation = 0.0f;
+    m_cameraPointer->zoom = 1.0f;
 
     // Player init
     m_window.addKeyToKeyHandle(
@@ -25,13 +25,13 @@ void PlaneGame::init() {
 
     // Camera movement with arrow keys
     m_window.addKeyToKeyHandle(
-        KEY_UP, [this]() { m_camera.target.y -= 300.0f * m_dt; });
+        KEY_UP, [this]() { m_cameraPointer->target.y -= 300.0f * m_dt; });
     m_window.addKeyToKeyHandle(
-        KEY_LEFT, [this]() { m_camera.target.x -= 300.0f * m_dt; });
+        KEY_LEFT, [this]() { m_cameraPointer->target.x -= 300.0f * m_dt; });
     m_window.addKeyToKeyHandle(
-        KEY_DOWN, [this]() { m_camera.target.y += 300.0f * m_dt; });
+        KEY_DOWN, [this]() { m_cameraPointer->target.y += 300.0f * m_dt; });
     m_window.addKeyToKeyHandle(
-        KEY_RIGHT, [this]() { m_camera.target.x += 300.0f * m_dt; });
+        KEY_RIGHT, [this]() { m_cameraPointer->target.x += 300.0f * m_dt; });
 }
 
 void PlaneGame::run() {
@@ -39,16 +39,20 @@ void PlaneGame::run() {
         m_dt = GetFrameTime();
         m_running = !WindowShouldClose();
         m_window.eventHandle();
+        m_cameraHandle.handleCamera();
 
         // Rendering
         m_window.startRender();
         m_window.clearScreen();
-        BeginMode2D(m_camera); // Start world space
+        BeginMode2D(m_cameraHandle.camera); // Start world space
 
         // Render here
+        m_cameraHandle.drawDebug();
         DrawCircle(200, 200, 20, BLUE);
         m_player.draw();
         EndMode2D(); // End world space
         m_window.endRender();
     }
+
+    m_window.close();
 }

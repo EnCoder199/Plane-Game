@@ -39,6 +39,5 @@ void MutableObject::rotateAmount(float p_rotation) {
 CollisionRectangle MutableObject::getCollisionBox() { return m_collisionbox; }
 
 void MutableObject::drawDebug() {
-    DrawRectangle(m_pos.x, m_pos.y, m_size.x, m_size.y,
-                  Color{230, 41, 55, 200});
+    DrawRectangle(m_pos.x, m_pos.y, m_size.x, m_size.y, Color{230, 41, 55, 200});
 }

@@ -20,9 +20,7 @@ void CameraHandling::configureViewport(int p_width, int p_height) {
     camera.offset = {p_width / 2.0f, p_height / 2.0f};
 }
 
-void CameraHandling::drawDebug() {
-    DrawRectangleV(m_pos, m_size, m_debugColour);
-}
+void CameraHandling::drawDebug() { DrawRectangleV(m_pos, m_size, m_debugColour); }
 void CameraHandling::handleCamera() {
     if (!isCollisionOut(m_player->getCollisionBox())) {
         return;
@@ -58,10 +56,8 @@ bool CameraHandling::isObjectOut(Vector2 p_pos, Vector2 p_size) {
 }
 
 bool CameraHandling::isCollisionOut(CollisionRectangle box) {
-    if (m_pos.x < box.getX() + box.getWidth() &&
-        m_pos.x + m_size.x > box.getX() &&
-        m_pos.y < box.getY() + box.getHeight() &&
-        m_pos.y + m_size.y > box.getY()) {
+    if (m_pos.x < box.getX() + box.getWidth() && m_pos.x + m_size.x > box.getX() &&
+        m_pos.y < box.getY() + box.getHeight() && m_pos.y + m_size.y > box.getY()) {
         return false;
     }
     return true;

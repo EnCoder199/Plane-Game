@@ -26,9 +26,8 @@ class CameraHandling {
 
     // Constructors
     explicit CameraHandling(Player *p_player)
-        : m_pos{0.0f, 0.0f}, m_size{0.0f, 0.0f},
-          m_debugColour{230, 41, 55, 200}, m_player(p_player), m_speed(300),
-          camera{} {}
+        : m_pos{0.0f, 0.0f}, m_size{0.0f, 0.0f}, m_debugColour{230, 41, 55, 200},
+          m_player(p_player), m_speed(300), camera{} {}
     CameraHandling(Vector2 p_pos, Vector2 p_size, Player *p_player)
         : m_pos(p_pos), m_size(p_size), m_player(p_player), m_speed(300) {}
 

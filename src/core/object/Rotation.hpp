@@ -27,7 +27,6 @@ class Rotation {
 };
 
 // Operator overides
-inline Rotation operator+(const Rotation &rotation1,
-                          const Rotation &rotation2) {
+inline Rotation operator+(const Rotation &rotation1, const Rotation &rotation2) {
     return Rotation(rotation1.getRawRotation() + rotation2.getRawRotation());
 }

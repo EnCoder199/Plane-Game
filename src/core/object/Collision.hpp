@@ -22,8 +22,7 @@ class CollisionRectangle {
     CollisionRectangle(float x, float y, float w, float h)
         : m_pos(Vector2{x, y}), m_size(Vector2{w, h}) {}
     // Vector2
-    CollisionRectangle(Vector2 p_pos, Vector2 p_size)
-        : m_pos(p_pos), m_size(p_size) {}
+    CollisionRectangle(Vector2 p_pos, Vector2 p_size) : m_pos(p_pos), m_size(p_size) {}
 
     // Functions
     bool isColliding(CollisionRectangle box);

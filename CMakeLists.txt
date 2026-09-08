@@ -28,9 +28,6 @@ else()
 endif()
 
 set(SOURCES
-    Plane-Game/Main.cpp
-    Plane-Game/Plane-Game.cpp
-    Plane-Game/Player.cpp
     src/core/CameraHandling.cpp
     src/core/Keyhandle.cpp
     src/core/Window.cpp

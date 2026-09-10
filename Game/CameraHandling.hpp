@@ -1,6 +1,7 @@
 #pragma once
-#include "../Plane-Game/Player.hpp"
+
 #include "Collision.hpp"
+#include "Player.hpp"
 #include "raylib.h"
 
 class CameraHandling {

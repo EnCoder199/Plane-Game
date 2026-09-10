@@ -1,12 +1,17 @@
-# Plane Game
+# Plague Doctor
+## Description
+Where the main character is an herbalist in a place that is infected with disease like the forest in nausicaä of the valley of the wind. They have to create potions to heal villagers. They have to buy food with the money you earn to survive.
 
-Plane Game is a raylib prototype for local PvP/PvE melee combat. The current
-build is the movement and camera foundation; combat, plane selection, enemies,
-and menus are planned next.
+## Gameplay
+### Book of herbs
+A book that has all the unlocked herbs
+
+### Potion recipe book
+A book that holds all the unlocked recipes
 
 ## Build
 
-The normal configure step downloads raylib 5.5 from its release archive:
+The normal configure step downloads ray-lib 5.5 from its release archive:
 
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
@@ -14,7 +19,7 @@ cmake --build build --target Template
 ./bin/Template
 ```
 
-For an offline build, point CMake at an existing raylib checkout:
+For an offline build, point CMake at an existing ray-lib checkout:
 
 ```sh
 cmake -S . -B build-local -DRAYLIB_SOURCE_DIR=/path/to/raylib
@@ -22,7 +27,7 @@ cmake --build build-local --target Template
 ```
 
 The project requires CMake, a C++17 compiler, and the macOS OpenGL/Cocoa
-frameworks supplied by raylib's platform configuration.
+frameworks supplied by ray-lib's platform configuration.
 
 ## Current Controls
 

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 # FIXED: Enforcing both C and CXX allows FetchContent to compile raylib natively anywhere
 project(Template LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -27,15 +27,17 @@ else()
     set(RAYLIB_INCLUDE_DIR "${raylib_SOURCE_DIR}/src")
 endif()
 
-set(SOURCES
-    src/core/CameraHandling.cpp
-    src/core/Keyhandle.cpp
-    src/core/Window.cpp
-    src/core/object/Collision.cpp
-    src/core/object/MutableObject.cpp
+file(GLOB_RECURSE CORE_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_SOURCE_DIR}/src/*.cpp"
+)
+file(GLOB_RECURSE GAME_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_SOURCE_DIR}/Game/*.cpp"
+)
+file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_SOURCE_DIR}/tests/*.cpp"
 )
 
-add_executable(Template ${SOURCES})
+add_executable(Template ${CORE_SOURCES} ${GAME_SOURCES})
 
 target_include_directories(Template PRIVATE
     "${CMAKE_SOURCE_DIR}/src"
@@ -51,11 +53,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang|Clang|GNU")
 endif()
 
 enable_testing()
-add_executable(CoreTests
-    tests/CoreTests.cpp
-    src/core/object/Collision.cpp
-    src/core/object/MutableObject.cpp
-)
+add_executable(CoreTests ${TEST_SOURCES} ${CORE_SOURCES})
 target_include_directories(CoreTests PRIVATE
     "${CMAKE_SOURCE_DIR}/src/core"
     "${CMAKE_SOURCE_DIR}/src/core/object"

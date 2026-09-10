@@ -3,5 +3,14 @@
     "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
     "clangd.arguments": [
         "--compile-commands-dir=${workspaceFolder}/build"
-    ]
+    ],
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ],
+    "spellright.suggestionsInHints": true
 }

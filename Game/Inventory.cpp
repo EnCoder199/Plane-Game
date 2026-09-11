@@ -56,3 +56,6 @@ Item Inventory::getItem(std::string p_name) {
     }
     return Item();
 }
+
+// GUI
+void Inventory::updateGUI() const { m_invGUI.drawDebug(); }

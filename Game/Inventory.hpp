@@ -1,5 +1,6 @@
 #pragma once
 
+#include "GUI.hpp"
 #include "Item.hpp"
 #include <cstring>
 #include <string>
@@ -11,6 +12,7 @@
 class Inventory {
   private:
     std::vector<std::tuple<Item, int>> m_items;
+    GUI m_invGUI;
 
     inline bool compareString(const std::string p_string, const std::string p_other) {
         if (p_string.size() != p_other.size()) {
@@ -26,8 +28,11 @@ class Inventory {
     }
 
   public:
-    Inventory() = default;
-    Inventory(std::vector<std::tuple<Item, int>> p_items) : m_items(p_items) {}
+    Inventory() : m_invGUI(GUI{Vector2{10, 10}}) {
+        m_invGUI.addElement(GUIElement{Vector2{0, 0}, Vector2{100, 100}, LIGHTGRAY});
+    }
+    Inventory(std::vector<std::tuple<Item, int>> p_items)
+        : m_items(p_items), m_invGUI(GUI{Vector2{10, 10}}) {}
 
     // Functions
     bool inInventory(std::string p_name);
@@ -40,6 +45,10 @@ class Inventory {
     void removeAll(std::string p_name);
     Item getItem(std::string p_name);
 
+    // GUI
+    void updateGUI() const;
+
+    // Operators
     Inventory &operator+=(const Item &p_item) {
         for (std::tuple<Item, int> &i_item : m_items) {
             Item &storedItem = std::get<0>(i_item);

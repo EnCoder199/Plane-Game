@@ -11,12 +11,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(RAYLIB_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 set(RAYLIB_SOURCE_DIR "" CACHE PATH
-    "Path to a local raylib checkout for offline builds")
+    "Path to a local raygui checkout for offline builds")
+
+set(RAYGUI_SOURCE_DIR "" CACHE PATH
+    "Path to a local raygui checkout for offline builds")
+
 if(RAYLIB_SOURCE_DIR)
     add_subdirectory("${RAYLIB_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/raylib-build"
                      EXCLUDE_FROM_ALL)
     set(RAYLIB_INCLUDE_DIR "${RAYLIB_SOURCE_DIR}/src")
 else()
+    # Raylib
     include(FetchContent)
     FetchContent_Declare(
         raylib
@@ -25,6 +30,20 @@ else()
     )
     FetchContent_MakeAvailable(raylib)
     set(RAYLIB_INCLUDE_DIR "${raylib_SOURCE_DIR}/src")
+
+endif()
+
+if(RAYGUI_SOURCE_DIR)
+    set(RAYGUI_INCLUDE_DIR "${RAYGUI_SOURCE_DIR}/src")
+else()
+    include(FetchContent)
+    FetchContent_Declare(
+        raygui
+        URL "https://github.com/raysan5/raygui/archive/refs/tags/5.0.tar.gz"
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    )
+    FetchContent_Populate(raygui)
+    set(RAYGUI_INCLUDE_DIR "${raygui_SOURCE_DIR}/src")
 endif()
 
 file(GLOB_RECURSE CORE_SOURCES CONFIGURE_DEPENDS
@@ -44,6 +63,7 @@ target_include_directories(Template PRIVATE
     "${CMAKE_SOURCE_DIR}/src/core"
     "${CMAKE_SOURCE_DIR}/src/core/object"
     "${RAYLIB_INCLUDE_DIR}"
+    "${RAYGUI_INCLUDE_DIR}"
 )
 
 target_link_libraries(Template PRIVATE raylib)
@@ -58,6 +78,7 @@ target_include_directories(CoreTests PRIVATE
     "${CMAKE_SOURCE_DIR}/src/core"
     "${CMAKE_SOURCE_DIR}/src/core/object"
     "${RAYLIB_INCLUDE_DIR}"
+    "${RAYGUI_INCLUDE_DIR}"
 )
 target_link_libraries(CoreTests PRIVATE raylib)
 if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang|Clang|GNU")

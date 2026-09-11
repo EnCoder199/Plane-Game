@@ -6,6 +6,8 @@
 #include <tuple>
 #include <vector>
 
+#include "raygui.h"
+
 class Inventory {
   private:
     std::vector<std::tuple<Item, int>> m_items;

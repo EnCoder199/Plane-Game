@@ -37,13 +37,15 @@ void World::draw() const {
 }
 
 bool World::pickupHerb(Vector2 p_pos, float p_distance, Item &p_item) {
-    for (auto i_herb = m_herbSet.begin(); i_herb != m_herbSet.end(); ++i_herb) {
-        const float distance =
-            std::hypot(p_pos.x - i_herb->getPos().x, p_pos.y - i_herb->getPos().y);
-        if (distance <= p_distance) {
-            p_item = i_herb->pickup();
-            m_herbSet.erase(i_herb);
-            return true;
+    if (IsKeyPressed(KEY_E)) {
+        for (auto i_herb = m_herbSet.begin(); i_herb != m_herbSet.end(); ++i_herb) {
+            const float distance =
+                std::hypot(p_pos.x - i_herb->getPos().x, p_pos.y - i_herb->getPos().y);
+            if (distance <= p_distance) {
+                p_item = i_herb->pickup();
+                m_herbSet.erase(i_herb);
+                return true;
+            }
         }
     }
     return false;

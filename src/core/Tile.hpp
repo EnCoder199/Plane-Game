@@ -1,6 +1,6 @@
 #pragma once
 
-#include <raylib.h>
+#include "raylib.h"
 
 enum class TileType { Grass, Sand, Water, Stone };
 
@@ -10,7 +10,10 @@ class Tile {
     Vector2 m_size;
     TileType m_type;
     Color m_color;
+    Texture2D m_skin;
     bool m_walkable;
+    Rectangle m_skinSourceRec;
+    Rectangle m_skinDestRec;
 
   public:
     Tile(Vector2 p_pos, TileType p_type, Vector2 p_size = {32.0f, 32.0f});
@@ -27,9 +30,11 @@ class Tile {
     void setSize(Vector2 p_size);
     void setType(TileType p_type);
     void setColor(Color p_color);
+    void setTexture(Texture2D p_texture);
     void setWalkable(bool p_walkable);
 
     // Functions
     bool contains(Vector2 p_point) const;
+    void drawDebug() const;
     void draw() const;
 };

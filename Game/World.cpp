@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include "Keybinds.hpp"
 #include <cmath>
 
 void World::generate() {
@@ -37,7 +38,7 @@ void World::draw() const {
 }
 
 bool World::pickupHerb(Vector2 p_pos, float p_distance, Item &p_item) {
-    if (IsKeyPressed(KEY_E)) {
+    if (IsKeyPressed(k_pickupItem)) {
         for (auto i_herb = m_herbSet.begin(); i_herb != m_herbSet.end(); ++i_herb) {
             const float distance =
                 std::hypot(p_pos.x - i_herb->getPos().x, p_pos.y - i_herb->getPos().y);

@@ -38,6 +38,8 @@ class GUI {
 
     // Getters
     const std::vector<GUIElement> getElements() const;
+    bool isShow() const;
+    const std::vector<GUIElement> *getElementsReference() const;
 
     // Setters
     void setElement(GUIElement p_element, int p_index);

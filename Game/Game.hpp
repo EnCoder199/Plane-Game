@@ -20,8 +20,9 @@ class PlaneGame {
 
   public:
     PlaneGame()
-        : m_running(true), m_dt(0.0f), m_player(0.0f, 0.0f, 30.0f, 30.0f, &m_world),
-          m_cameraHandle(&m_player), m_cameraPointer(&m_cameraHandle.camera) {}
+        : m_running(true), m_dt(0.0f), m_window(640, 360),
+          m_player(0.0f, 0.0f, 30.0f, 30.0f, &m_world), m_cameraHandle(&m_player),
+          m_cameraPointer(&m_cameraHandle.camera) {}
     void init();
     void run();
 };

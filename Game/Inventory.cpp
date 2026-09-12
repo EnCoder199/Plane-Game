@@ -1,4 +1,8 @@
 #include "Inventory.hpp"
+#include "Item.hpp"
+#include "Keybinds.hpp"
+#include <cmath>
+#include <iostream>
 #include <ranges>
 
 bool Inventory::inInventory(std::string p_name) {
@@ -58,4 +62,19 @@ Item Inventory::getItem(std::string p_name) {
 }
 
 // GUI
-void Inventory::updateGUI() const { m_invGUI.drawDebug(); }
+void Inventory::updateGUI() { m_invGUI.drawDebug(); }
+
+void Inventory::updateVisibility() {
+    if (IsKeyPressed(k_openInventory)) {
+        m_invGUI.setShow(true);
+        std::cout << "Open inv" << std::endl;
+    }
+
+    if (IsKeyPressed(k_exitGUI)) {
+        std::cout << "Esc Pressed" << std::endl;
+        if (m_invGUI.isShow()) {
+            m_invGUI.setShow(false);
+            std::cout << "Hidden GUI" << std::endl;
+        }
+    }
+}

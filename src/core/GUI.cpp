@@ -28,12 +28,16 @@ void GUIElement::drawDebug(Vector2 p_offset) const {
 // Getters
 const std::vector<GUIElement> GUI::getElements() const { return m_elements; }
 
+bool GUI::isShow() const { return m_show; }
+
 // Setters
 void GUI::setElement(GUIElement p_element, int p_index) {
     m_elements[p_index] = p_element;
 }
 
 void GUI::setShow(bool p_show) { m_show = p_show; }
+
+const std::vector<GUIElement> *GUI::getElementsReference() const { return &m_elements; }
 
 // Functions
 void GUI::drawDebug() const {

@@ -14,6 +14,9 @@ class Inventory {
     std::vector<std::tuple<Item, int>> m_items;
     GUI m_invGUI;
 
+    // GUI size changing NOTE: To be merged with Inventory
+    Vector2 m_prevScreenSize;
+
     inline bool compareString(const std::string p_string, const std::string p_other) {
         if (p_string.size() != p_other.size()) {
             return false;
@@ -28,8 +31,8 @@ class Inventory {
     }
 
   public:
-    Inventory() : m_invGUI(GUI{Vector2{10, 10}}) {
-        m_invGUI.addElement(GUIElement{Vector2{0, 0}, Vector2{100, 100}, LIGHTGRAY});
+    Inventory() : m_invGUI(GUI{Vector2{0, 0}}) {
+        m_invGUI.addElement(GUIElement{Vector2{10, 10}, Vector2{100, 100}, LIGHTGRAY});
     }
     Inventory(std::vector<std::tuple<Item, int>> p_items)
         : m_items(p_items), m_invGUI(GUI{Vector2{10, 10}}) {}
@@ -46,7 +49,8 @@ class Inventory {
     Item getItem(std::string p_name);
 
     // GUI
-    void updateGUI() const;
+    void updateGUI();
+    void updateVisibility();
 
     // Operators
     Inventory &operator+=(const Item &p_item) {

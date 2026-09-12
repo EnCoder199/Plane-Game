@@ -2,7 +2,9 @@
 #include "Logging.hpp"
 
 bool Window::initWindow() {
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(m_width, m_height, "Raylib 6.0 Template");
+    SetExitKey(KEY_NULL);
     m_initialized = IsWindowReady();
     if (!m_initialized) {
         return false;
@@ -13,9 +15,7 @@ bool Window::initWindow() {
 
 void Window::clearScreen() { ClearBackground(RAYWHITE); }
 
-void Window::startRender() { // Singleton spam :D
-    BeginDrawing();
-}
+void Window::startRender() { BeginDrawing(); }
 
 void Window::endRender() { EndDrawing(); }
 

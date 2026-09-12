@@ -18,4 +18,5 @@ void Player::update() {
 
     // Show inventory
     m_inventory.updateGUI();
+    m_inventory.updateVisibility();
 }

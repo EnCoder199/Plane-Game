@@ -14,9 +14,6 @@ class Inventory {
     std::vector<std::tuple<Item, int>> m_items;
     GUI m_invGUI;
 
-    // GUI size changing NOTE: To be merged with Inventory
-    Vector2 m_prevScreenSize;
-
     inline bool compareString(const std::string p_string, const std::string p_other) {
         if (p_string.size() != p_other.size()) {
             return false;

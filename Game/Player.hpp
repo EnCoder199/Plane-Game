@@ -26,4 +26,5 @@ class Player : public MutableObject {
     inline void drawDebug() { DrawRectangleV(m_pos, m_size, m_colour); }
     inline void addItem(Item p_item) { m_inventory.addItem(p_item); }
     void update();
+    void drawGUI();
 };

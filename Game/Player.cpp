@@ -15,8 +15,10 @@ void Player::update() {
         std::cout << "Item Picked Up Item: " << pickedItem.getName() << std::endl;
         m_inventory.addItem(pickedItem);
     }
+}
 
+void Player::drawGUI() {
     // Show inventory
-    m_inventory.updateGUI();
+    m_inventory.drawGUI();
     m_inventory.updateVisibility();
 }

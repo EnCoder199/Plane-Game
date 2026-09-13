@@ -42,7 +42,7 @@ void PlaneGame::run() {
     const int virtualWidth{640};
     const int virtualHeight{360};
     RenderTexture2D target = LoadRenderTexture(virtualWidth, virtualHeight);
-    SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
+    SetTextureFilter(target.texture, TEXTURE_FILTER_POINT);
     while (m_running) {
         m_dt = GetFrameTime();
         m_running = !WindowShouldClose();
@@ -52,7 +52,6 @@ void PlaneGame::run() {
 
         BeginTextureMode(target); // Start drawing to the virtual canvas
         m_window.clearScreen();
-
         BeginMode2D(m_cameraHandle.camera); // Start world space
         m_world.draw();
         DrawCircle(200, 200, 20, BLUE);
@@ -61,18 +60,18 @@ void PlaneGame::run() {
         EndTextureMode();
 
         m_window.startRender();
-
         ClearBackground(BLACK);
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)target.texture.width,
                                -(float)target.texture.height};
-
         Rectangle destRec = {0.0f, 0.0f, (float)GetScreenWidth(),
                              (float)GetScreenHeight()};
         Vector2 origin = {0.0f, 0.0f};
 
         DrawTexturePro(target.texture, sourceRec, destRec, origin, 0.0f, WHITE);
 
+        // GUI
+        m_player.drawGUI();
         m_window.endRender();
     }
     m_window.close();

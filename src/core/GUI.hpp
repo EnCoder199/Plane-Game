@@ -1,6 +1,7 @@
 #pragma once
 
 #include "raylib.h"
+#include <string>
 #include <vector>
 
 class GUIElement {
@@ -9,10 +10,20 @@ class GUIElement {
     Vector2 m_size;
     Color m_baseColor;
     bool m_show;
+    std::string m_text;
+    int m_count;
+    Color m_iconColor;
+    bool m_hasItem;
 
   public:
     GUIElement(Vector2 p_pos, Vector2 p_size, Color p_baseColor)
-        : m_pos(p_pos), m_size(p_size), m_baseColor(p_baseColor), m_show(true) {}
+        : m_pos(p_pos), m_size(p_size), m_baseColor(p_baseColor), m_show(true),
+          m_count(0), m_iconColor(WHITE), m_hasItem(false) {}
+    GUIElement(Vector2 p_pos, Vector2 p_size, Color p_baseColor, std::string p_text,
+               int p_count, Color p_iconColor)
+        : m_pos(p_pos), m_size(p_size), m_baseColor(p_baseColor), m_show(true),
+          m_text(std::move(p_text)), m_count(p_count), m_iconColor(p_iconColor),
+          m_hasItem(true) {}
 
     // Getters
     Vector2 getPos();
@@ -48,4 +59,7 @@ class GUI {
     // Functions
     void drawDebug() const;
     void addElement(GUIElement p_element);
+    void addItem(Vector2 p_pos, Vector2 p_size, std::string p_name, int p_count,
+                 Color p_iconColor);
+    void clearElements();
 };
